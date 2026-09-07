@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <h1>Real Estate Portal</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/properties">Properties</a></li>
+      <li><a href="/add-property">Add Property</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>Find Your Dream Home</h2>
+    <form action="/properties/search" method="GET">
+      <input type="text" name="location" placeholder="Enter Location...">
+      <select name="type">
+        <option value="">All Types</option>
+        <option value="Apartment">Apartment</option>
+        <option value="House">House</option>
+        <option value="Villa">Villa</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section class="featured">
+    <h3>Featured Properties</h3>
+    <div class="property-grid">
+      <!-- Dynamically populated if using Thymeleaf -->
+      <div class="property-card" th:each="property : ${properties}">
+        <h4 th:text="${property.title}">Modern Apartment</h4>
+        <p th:text="${property.location}">Location</p>
+        <p>Price: $<span th:text="${property.price}">250000</span></p>
+        <a th:href="@{/properties/{id}(id=${property.id})}">View Details</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Real Estate Backend System. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
