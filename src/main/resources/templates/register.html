@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Real Estate Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+  <h2 class="text-2xl font-bold mb-6 text-center">Create New Account</h2>
+
+  <form th:action="@{/register}" th:object="${user}" method="post" class="space-y-4">
+    <div>
+      <label class="block font-semibold">Full Name</label>
+      <input type="text" th:field="*{name}" class="w-full border p-2 rounded" required />
+    </div>
+    <div>
+      <label class="block font-semibold">Email</label>
+      <input type="email" th:field="*{email}" class="w-full border p-2 rounded" required />
+    </div>
+    <div>
+      <label class="block font-semibold">Password</label>
+      <input type="password" th:field="*{password}" class="w-full border p-2 rounded" required />
+    </div>
+    <div>
+      <label class="block font-semibold">Role</label>
+      <select th:field="*{role}" class="w-full border p-2 rounded">
+        <option value="ROLE_CUSTOMER">Customer</option>
+        <option value="ROLE_ADMIN">Admin</option>
+      </select>
+    </div>
+    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded font-bold">Register</button>
+  </form>
+  <p class="mt-4 text-center text-sm">
+    Already have an account? <a href="/login" class="text-blue-600 underline">Login here</a>.
+  </p>
+</div>
+</body>
+</html>

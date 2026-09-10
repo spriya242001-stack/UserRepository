@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Real Estate Portal</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <title>Login - Real Estate Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="auth-body">
+<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-<div class="auth-card">
-    <div class="auth-header">
-        <h2>Welcome Back</h2>
-        <p>Sign in to access your Real Estate account</p>
+<div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+  <h2 class="text-2xl font-bold mb-6 text-center">Login to Your Account</h2>
+
+  <div th:if="${param.registered}" class="bg-green-100 text-green-700 p-2 rounded mb-4 text-center">
+    Registration successful! Please log in.
+  </div>
+  <div th:if="${param.error}" class="bg-red-100 text-red-700 p-2 rounded mb-4 text-center">
+    Invalid username or password.
+  </div>
+  <div th:if="${param.logout}" class="bg-blue-100 text-blue-700 p-2 rounded mb-4 text-center">
+    You have been logged out.
+  </div>
+
+  <form th:action="@{/login}" method="post" >
+    <div>
+      <label class="block font-semibold">Email</label>
+      <input type="email" name="username" class="w-full border p-2 rounded" required />
     </div>
-
-    <!-- Error notification message -->
-    <div th:if="${param.error}" class="alert alert-error">
-        Invalid username or password.
+    <div>
+      <label class="block font-semibold">Password</label>
+      <input type="password" name="password" class="w-full border p-2 rounded" required />
     </div>
-
-    <div th:if="${param.logout}" class="alert alert-info">
-        You have been logged out successfully.
-    </div>
-
-    <form action="/api/auth/login" method="POST" class="auth-form">
-        <div class="form-group">
-            <label for="username">Username or Email</label>
-            <input type="text" id="username" name="username" required autocomplete="username" placeholder="Enter your username">
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
-        </div>
-
-        <div class="form-actions">
-            <label class="remember-me">
-                <input type="checkbox" name="remember-me"> Remember me
-            </label>
-            <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
-        </div>
-
-        <button type="submit" class="btn-primary btn-block">Sign In</button>
-    </form>
-
-    <div class="auth-footer">
-        <p>Don't have an account? <a href="/register">Register here</a></p>
-        <p><a href="/">&larr; Back to Home</a></p>
-    </div>
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold">Login</button>
+  </form>
+  <p class="mt-4 text-center text-sm">
+    Don't have an account? <a href="/register" class="text-blue-600 underline">Register here</a>.
+  </p>
 </div>
-
 </body>
 </html>

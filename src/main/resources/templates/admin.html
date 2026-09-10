@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+<a th:href="@{/}">Home</a>
+
+<h2>Pending Properties</h2>
+<div th:if="${#lists.isEmpty(pendingProperties)}">No pending properties.</div>
+<div th:each="property : ${pendingProperties}">
+    <h3 th:text="${property.title}">Property</h3>
+    <p th:text="${property.location}">Location</p>
+
+    <form th:action="@{'/admin/approve/' + ${property.id}}" method="post">
+        <button type="submit">Approve</button>
+    </form>
+</div>
+
+<h2>Users</h2>
+<div th:each="user : ${users}">
+    <span th:text="${user.name}">Name</span>
+    <span th:text="${user.email}">Email</span>
+    <span th:text="${user.role}">Role</span>
+</div>
+</body>
+</html>

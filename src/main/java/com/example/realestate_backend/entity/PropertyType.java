@@ -1,6 +1,8 @@
 package com.example.realestate_backend.entity;
-public enum ListingType {
+
+
+
+public enum PropertyType {
     SALE,
-    RENT,
-    LEASE
+    RENT
 }
